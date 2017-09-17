@@ -39,8 +39,6 @@
 
 	<!-- 加载 properties -->
 	<context:property-placeholder location="classpath:properties/global.properties" />
-	<!-- SpringContext -->
-	<bean id="springContextHolder" class="com.vungu.vp.core.utils.SpringContextHolder" lazy-init="false" />
 	<!-- c3p0连接池配置 -->
 	<bean id="ds1" class="com.mchange.v2.c3p0.ComboPooledDataSource">
 		<property name="driverClass" value="${db.driverClass}" />
