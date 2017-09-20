@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.module.navication.dao.NavDao" >
+
+  <!-- 插入一条数据 -->
+  <insert id="insertNewNav" parameterType="com.module.navication.entity.Nav">
+    insert into
+        nav
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test="id != null and id !=''">
+            id,
+        </if>
+        <if test="aurl != null and aurl != ''">
+            actualURl,
+        </if>
+        <if test="aName != null and aName != ''">
+            actualName,
+        </if>
+        <if test="aImg != null and aImg != ''">
+            actualImg,
+        </if>
+        <if test="index != null and index != ''">
+            index_no,
+        </if>
+        <if test="categoryId !=null and categoryId != ''">
+            categoryId,
+        </if>
+    </trim>
+    <trim prefix="values(" suffix=")" suffixOverrides=",">
+        <if test="id != null and id !=''">
+            #{id},
+        </if>
+        <if test="aurl != null and aurl != ''">
+            #{aurl},
+        </if>
+        <if test="aName != null and aName != ''">
+            #{aName},
+        </if>
+        <if test="aImg != null and aImg != ''">
+            #{aImg},
+        </if>
+        <if test="index != null and index != ''">
+            #{index},
+        </if>
+        <if test="categoryId !=null and categoryId != ''">
+            #{categoryId},
+        </if>
+    </trim>
+  </insert>
+  
+  <!-- 修改一条记录 -->
+  <update id="updateNav" parameterType="com.module.navication.entity.Nav">
+    update 
+     nav
+    <set>
+         <if test="id != null and id !=''">
+            id=#{id},
+        </if>
+        <if test="aurl != null and aurl != ''">
+            actualURl=#{aurl},
+        </if>
+        <if test="aName != null and aName != ''">
+            actualName=#{aName},
+        </if>
+        <if test="aImg != null and aImg != ''">
+            actualImg=#{aImg},
+        </if>
+        <if test="index != null and index != ''">
+            index_no=#{index},
+        </if>
+        <if test="categoryId !=null and categoryId != ''">
+            categoryId=#{categoryId},
+        </if>
+    </set>
+    where
+        id=#{id}
+  </update>
+  
+  <!-- 获得全部导航 -->
+  <select id="queryNav" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select * 
+    from nav
+  </select>	
+  <select id="queryNavByid">
+    select 
+    * 
+    from nav
+    where 
+    id=#{id}
+  </select>
+  
+  <resultMap id="BaseResultMap" type="com.module.navication.entity.Nav">
+        <id column="id" property="id" jdbcType="VARCHAR" /><!-- 唯一标识 -->
+        <result column="actualURL" property="aurl" jdbcType="VARCHAR"/>
+        <result column="actualName" property="aName" jdbcType="VARCHAR"/>
+        <result column="actualImg" property="aImg" jdbcType="VARCHAR"/>
+        <result column="index_no" property="index" jdbcType="VARCHAR"/>
+        <result column="categoryId" property="categoryId" jdbcType="VARCHAR"/>
+    </resultMap>
+</mapper>

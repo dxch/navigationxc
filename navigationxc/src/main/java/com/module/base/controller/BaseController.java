@@ -10,8 +10,9 @@ public class BaseController {
 
     @RequestMapping("/s")
     public ModelAndView ss(){
+        System.out.println("asdsad");
         ModelAndView mv=new ModelAndView();
-        mv.setViewName("catelog");
+        mv.setViewName("catelog/catelog");
         return mv;
     }
 }

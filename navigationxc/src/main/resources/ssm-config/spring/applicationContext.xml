@@ -16,52 +16,81 @@
      default-lazy-init="false">
      
      
-<!--    <dubbo:application name="dubbo_consumer"></dubbo:application>  
-   使用zookeeper注册中心暴露服务地址    
-   <dubbo:registry address="zookeeper://127.0.0.1:2181" ></dubbo:registry> 
-   <dubbo:annotation package="com.vungu.operation.**" />   
-   <dubbo:reference interface="com.vungu.interfaces.CommentService" id="commentService" timeout="1200000"></dubbo:reference> 
-   <dubbo:reference interface="com.vungu.interfaces.ModelService" id="modelservice" timeout="1200000"></dubbo:reference>
-   <dubbo:reference interface="com.vungu.interfaces.ActivitylogService" id="activitylogservice" timeout="1200000"></dubbo:reference> 
-   <dubbo:reference interface="com.vungu.interfaces.PaySettingService" id="paySettingService" timeout="1200000"></dubbo:reference>
-   <dubbo:reference interface="com.vungu.interfaces.AccuPointsService" id="accuPointsService" timeout="1200000"></dubbo:reference>
-   <dubbo:reference interface="com.vungu.interfaces.LoginLogService" id="loginlogService" timeout="1200000"></dubbo:reference>
-    <dubbo:reference interface="com.vungu.interfaces.CommodityService" id="commodityService" timeout="1200000"></dubbo:reference>
-  <dubbo:reference interface="com.vungu.interfaces.ComplainService" id="complainService" timeout="1200000"></dubbo:reference>
-   <dubbo:reference interface="com.vungu.interfaces.SelGoodsTypeService" id="selGoodsTypeService" timeout="1200000"></dubbo:reference> -->
    
    
 	<!-- 使用annotation 自动注册bean,并检查@Required,@Autowired的属性已被注入 -->
-	<context:component-scan base-package="com.vungu.appinterface.**.service,com.vungu.regcache.cservice,com.vungu.regcache.cpo">
+	<context:component-scan base-package="com.module.**.service">
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
 		<context:exclude-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice" />
 	</context:component-scan>
 
+
 	<!-- 加载 properties -->
 	<context:property-placeholder location="classpath:properties/global.properties" />
+	<!-- SpringContext -->
+	<!--<bean id="springContextHolder" class="com.vungu.vp.core.utils.SpringContextHolder" lazy-init="false" /> -->
 	<!-- c3p0连接池配置 -->
 	<bean id="ds1" class="com.mchange.v2.c3p0.ComboPooledDataSource">
 		<property name="driverClass" value="${db.driverClass}" />
 		<property name="jdbcUrl" value="${db.jdbcUrl}" />
 		<property name="user" value="${db.user}" />
-		<property name="password" value="${db.password}" />		
+		<property name="password" value="${db.password}" />
+		
+		
+		
+		
 	</bean>
-
+	<bean id="ds2" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass" value="${db2.driverClass}" />
+		<property name="jdbcUrl" value="${db2.jdbcUrl}" />
+		<property name="user" value="${db2.user}" />
+		<property name="password" value="${db2.password}" />
+	</bean>
+	<bean id="ds3" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass" value="${db2.driverClass}" />
+		<property name="jdbcUrl" value="${db3.jdbcUrl}" />
+		<property name="user" value="${db3.user}" />
+		<property name="password" value="${db3.password}" />
+	</bean>
+	
+	<bean id="dynamicDataSource" class="com.module.source.DynamicDataSource">
+   	 	<property name="targetDataSources">
+      	<map>
+        	<!-- 对应spring提供的AbstractRoutingDataSource的Map -->
+        	<entry key="ds1" value-ref="ds1"/>
+        	<entry key="ds2" value-ref="ds2"/>
+        	<entry key="ds3" value-ref="ds3"/>
+      	</map>
+     	</property>
+     	<property name="defaultTargetDataSource" ref="ds1"/>
+     </bean>
+     
+	<!-- <bean id="dynamicDataSource" class="com.vungu.utilities.doubledatesource.DynamicDataSource">
+		<property name="targetDataSources">
+			<map key-type="java.lang.String">
+				<entry value-ref="defaultDataSource" key="defaultDataSource" />
+				<entry value-ref="vunmember" key="vunmember" />
+			</map>
+		</property>
+		<property name="defaultTargetDataSource" ref="defaultDataSource" />默认使用productDataSource的数据源
+	</bean> -->
 	
 	
 	<!--sqlSessionFactory配置 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="mapperLocations" value="classpath:mybatis-mapper/**/*Mapper.xml" />
 		<property name="configLocation" value="classpath:ssm-config/mybatis/mybatis_config.xml" />
-		<property name="dataSource" ref="ds1" />
+		<property name="dataSource" ref="dynamicDataSource" />
 	</bean>
+	<!-- 配置数据源切换实现类 -->  
+    <bean id="dataSourceContextHolder" class="com.module.source.DataSourceContextHolder" />  
 
 
 
 
 	<!--自动扫描mapper包 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.vungu.appinterface.**.dao" />
+		<property name="basePackage" value="com.module.**.dao" />
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
 	</bean>
 
