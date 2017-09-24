@@ -5,7 +5,7 @@
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:jee="http://www.springframework.org/schema/jee" 
 	xmlns:tx="http://www.springframework.org/schema/tx"
-	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:aop="http://www.springframework.org/schema/aop" 
 	xsi:schemaLocation="  
             http://www.springframework.org/schema/beans
             http://www.springframework.org/schema/beans/spring-beans.xsd 
@@ -23,7 +23,15 @@
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
 		<context:exclude-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice" />
 	</context:component-scan>
+    
+   <!-- <bean id="websocket" class="com.module.websocket.controller.WebsocketEndPoint"/>  
 
+	<websocket:handlers>  
+	    <websocket:mapping path="/websocket" handler="websocket"/>  
+	    <websocket:handshake-interceptors>  
+	    <bean class="com.module.websocket.controller.HandshakeInterceptor"/>  
+	    </websocket:handshake-interceptors>  
+	</websocket:handlers>  -->
 
 	<!-- 加载 properties -->
 	<context:property-placeholder location="classpath:properties/global.properties" />

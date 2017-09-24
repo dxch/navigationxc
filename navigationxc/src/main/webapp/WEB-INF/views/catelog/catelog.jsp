@@ -204,6 +204,7 @@
             </div>
         </div>
 		</div>
+		<button onclick='insertNewNav()'>insertnav</button>
         <script src="http://s1.bdstatic.com/r/www/cache/global/js/BaiduHttps_20150714_zhanzhang.js"></script>
         <script>
             function checkHttps() {
@@ -233,12 +234,14 @@
             var strDate = date.getDate();
             var year = date.getFullYear()
             $(function() {
+            	getnavList()
                 //搜索栏消失
                 $('.forms').hide();
                 $('#baiduForm').show()
                 $('#daohang').hide();
                 //设置背景图片
 //              $('body').attr("background", "${bingimg}")
+				//具体搜索栏显示
                 $('#baidu').click(function() {
                     $('.forms').hide();
                     $('#baiduForm').show();
@@ -254,6 +257,7 @@
                     $('#sougouForm').show();
                     $('#nameSou').text("搜狗")
                 })
+                //导航区域是否显示
                 $('#daohanghome').click(function(){
                     $('#daohang').toggle()
                 })
@@ -267,6 +271,27 @@
 //          	$('.allcontent').css("background-size","100% "+x+"px;")
 //          	$('.allcontent').css("background-size",y+"px "+x+"px;")
             })
+            function insertNewNav(){
+            	layer.open({
+				  type: 2,
+				  title: '添加导航',
+				  shadeClose: true,
+				  skin: 'layui-layer-rim', //加上边框
+				  area: ['420px', '240px'], //宽高
+				  content: '${ctx}/nav/insertnewnav'
+				});
+            }
+            function getnavList(){
+            	$.ajax({
+            		type:"post",
+            		url:"${ctx}/nav/getnavlist",
+            		async:true,
+            		dataType:'json',
+            		success:function(data){
+            			console.log(data)
+            		}
+            	});
+            }
             //返回背景图片
             function retundata() {
                 var datastr = "${ctxStatic}/img/bing/bing" + year + "-" + month + "-" + strDate + ".jpg"

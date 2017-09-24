@@ -39,6 +39,11 @@
           <artifactId>vp-core</artifactId>
           <version>1.0</version>
         </dependency>
+        <dependency>  
+		    <groupId>javax.servlet</groupId>  
+		    <artifactId>javax.servlet-api</artifactId>  
+		    <version>3.1.0</version>  
+		</dependency> 
         <!-- sendMsg -->
         <dependency>
           <groupId>com.linkage.netmsg</groupId>
@@ -84,6 +89,16 @@
             <artifactId>spring-jdbc</artifactId>
             <version>${org.springframework-version}</version>
         </dependency>
+         <!-- <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-websocket</artifactId>
+            <version>${org.springframework-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-messaging</artifactId>
+            <version>${org.springframework-version}</version>
+        </dependency>-->
         <!-- AspectJ -->
         <dependency>
             <groupId>org.aspectj</groupId>

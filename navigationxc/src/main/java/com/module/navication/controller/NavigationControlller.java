@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.module.navication.entity.Nav;
 import com.module.navication.service.NavService;
 import com.module.source.DataSourceContextHolder;
+import com.user.util.UUidStr;
 import com.user.util.bingImg;
 
 @RequestMapping("/nav")
@@ -33,9 +35,17 @@ public class NavigationControlller {
         mv.setViewName("catelog/catelog");
         return mv;
     }
+    @RequestMapping("/insertnewnav")
+    public ModelAndView insertNewNav(){
+        ModelAndView mv=new ModelAndView();
+        mv.setViewName("catelog/cateinsert");
+        return mv;
+    }
+    
     @RequestMapping("/insertnav")
     @ResponseBody
     public Map<String,Object> insertNav(Nav n){
+        n.setId(UUidStr.uuid());
         int i=navService.insertNewNav(n);
         Map<String,Object> m=new HashMap<String,Object>();
         m.put("count", i);
@@ -52,7 +62,6 @@ public class NavigationControlller {
     @RequestMapping("/getnavlist")
     @ResponseBody
     public List<Nav> getnavList(){
-        System.out.println("asd");
         Map<String,Object> m=new HashMap<String,Object>();
         List<Nav> l=navService.queryNav(m);
         return l;

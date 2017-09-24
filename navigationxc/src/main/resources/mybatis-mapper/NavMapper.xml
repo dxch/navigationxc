@@ -11,7 +11,7 @@
             id,
         </if>
         <if test="aurl != null and aurl != ''">
-            actualURl,
+            actualURL,
         </if>
         <if test="aName != null and aName != ''">
             actualName,
@@ -57,7 +57,7 @@
             id=#{id},
         </if>
         <if test="aurl != null and aurl != ''">
-            actualURl=#{aurl},
+            actualURL=#{aurl},
         </if>
         <if test="aName != null and aName != ''">
             actualName=#{aName},
