@@ -24,7 +24,7 @@
             }
 			body{
 				background-size:100%;
-				background: url(${bingimg}) no-repeat;
+				/*background: url(${bingimg}) no-repeat;*/
 				width:100%;
 				overflow:hidden;
 				
@@ -47,57 +47,42 @@
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active">
-                            <a href="javascript:void(0)" id='daohanghome'>Navigation</a>
+                        <li id='daohanghome' v-bind:class='{active:isactive}'>
+                            <a href="javascript:void(0)"  v-on:click="dhshow">{{ name }}</a>
                         </li>
 
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
-                            <a href="#" id='nameSou' class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">百度<span class="caret"></span></a>
+                            <a href="#" id='nameSou' class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ title }}<span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li id='baidu'>
+                                <li id='baidu' v-on:click='baidushow'>
                                     <a href="javascript:void(0)">百度</a>
                                 </li>
-                                <li id='bing'>
+                                <li id='bing' v-on:click='bingshow'>
                                     <a href="javascript:void())">Bing</a>
                                 </li>
-                                <li id='sougou'>
+                                <li id='sougou' v-on:click='sougoushow'>
                                     <a href="javascript:void())">搜狗</a>
                                 </li>
                             </ul>
                         </li>
                         <li>
-                            <form id='baiduForm' class="navbar-form navbar-left forms" onsubmit="return baiduWithHttps(this)" action="http://www.baidu.com/baidu" target="_blank">
+                            <form id='baiduForm' v-if='seen' class="navbar-form navbar-left forms" onsubmit="return baiduWithHttps(this)" action="http://www.baidu.com/baidu" target="_blank">
                                 <input name="tn" type="hidden" value="SE_zzsearchcode_shhzc78w">
-                                <!--<a href="https://www.baidu.com/" target="_blank">
-                        <img src="https://www.baidu.com/img/baidu_jgylogo3.gif" alt="Baidu" align="bottom" border="0">
-                    </a>-->
                                 <input class="form-control" type="text" onfocus="checkHttps" name="word" size="30">
                                 <input type="submit" value="百度搜索" class="btn btn-default">
                             </form>
-                            <form id='sougouForm' class="navbar-form navbar-left forms" onsubmit="return baiduWithHttps(this)" action="http://www.baidu.com/baidu" target="_blank">
+                            <form id='sougouForm' v-if='seen' class="navbar-form navbar-left forms" onsubmit="return baiduWithHttps(this)" action="http://www.baidu.com/baidu" target="_blank">
                                 <input name="tn" type="hidden" value="SE_zzsearchcode_shhzc78w">
-                                <!--<a href="https://www.baidu.com/" target="_blank">
-                        <img src="https://www.baidu.com/img/baidu_jgylogo3.gif" alt="Baidu" align="bottom" border="0">
-                    </a>-->
                                 <input class="form-control" type="text" onfocus="checkHttps" name="word" size="30">
                                 <input type="submit" value="搜狗搜索" class="btn btn-default">
                             </form>
-                            <form id='bingForm' class="navbar-form navbar-left forms" onsubmit="return baiduWithHttps(this)" action="http://www.baidu.com/baidu" target="_blank">
+                            <form id='bingForm' v-if='seen' class="navbar-form navbar-left forms" onsubmit="return baiduWithHttps(this)" action="http://www.baidu.com/baidu" target="_blank">
                                 <input name="tn" type="hidden" value="SE_zzsearchcode_shhzc78w">
-                                <!--<a href="https://www.baidu.com/" target="_blank">
-                        <img src="https://www.baidu.com/img/baidu_jgylogo3.gif" alt="Baidu" align="bottom" border="0">
-                    </a>-->
                                 <input class="form-control" type="text" onfocus="checkHttps" name="word" size="30">
                                 <input type="submit" value="Bing搜索" class="btn btn-default">
                             </form>
-                            <!--<form id='bingForm'  onsubmit="return baiduWithHttps(this)" action="http://www.baidu.com/baidu" target="_blank" class="navbar-form navbar-left forms">
-                                <div class="form-group">
-                                    <input type="text"  class="form-control"  onfocus="checkHttps" name="word"  size="30">
-                                </div>
-                                <input type="submit "  class="btn btn-default" value="百度saddsa搜索">
-                            </form> -->
                         </li>
                     </ul>
                 </div>
@@ -105,100 +90,14 @@
             </div>
         </nav>
         <div id='backgroundimg' style='width:100%'>
-            <div id='daohang' style="margin-left:25% ;margin-top: 300px;">
+            <div id='daohang' style="margin-left:25% ;margin-top: 300px;" v-if="seen">
                 <div style='display: block;width:50%;align-content: center;'>
                     <table style="width:100%;background-color: #FFFFFF;">
                         <thead><tr>
                             
                             <td id='daohang2'>→ 我的导航</td>
                         </tr></thead>
-                        <tbody>
-                        <tr>
-                            <td>
-                                <div class="nav-item daohang">
-                                    <img src="https://ss2.bdstatic.com/lfoZeXSm1A5BphGlnYG/icon/95486.png" />
-                                    <a class="border-for-item" title="百度贴吧" href="http://tieba.baidu.com/" target="_blank">
-                                        <span class="nav-text-content">百度贴吧</span></div>
-                                    </a>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="nav-item daohang">
-                                    <img src="https://ss0.bdstatic.com/l4oZeXSm1A5BphGlnYG/icon/2556.png?3" />
-                                    <a class="border-for-item" title="江教院吧" href="http://tieba.baidu.com/f?kw=%BD%AD%CB%D5%BD%CC%D3%FD%D1%A7%D4%BA" target="_blank">
-                                        <span class="nav-text-content">江教院吧</span></div>
-                                    </a>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="nav-item daohang">
-                                    <img src="https://ss0.bdstatic.com/l4oZeXSm1A5BphGlnYG/icon/2556.png?3" />
-                                    <a class="border-for-item" title="江二师吧" href="http://tieba.baidu.com/f?ie=utf-8&amp;kw=%E6%B1%9F%E8%8B%8F%E7%AC%AC%E4%BA%8C%E5%B8%88%E8%8C%83%E5%AD%A6%E9%99%A2" target="_blank">
-                                        <span class="nav-text-content">江二师吧</span></div>
-                                    </a>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="nav-item daohang">
-                                    <img src="https://ss0.bdstatic.com/k4oZeXSm1A5BphGlnYG/icon/7656.png" />
-                                    <a class="border-for-item" title="百度云盘" href="http://yun.baidu.com/" target="_blank">
-                                        <span class="nav-text-content">百度云盘</span></div>
-                                    </a>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="nav-item daohang">
-                                    <img src="https://ss2.bdstatic.com/kfoZeXSm1A5BphGlnYG/icon/95498.png" />
-                                    <a class="border-for-item" title="163邮箱" href="http://mail.163.com/" target="_blank">
-                                        <span class="nav-text-content">163邮箱</span></div>
-                                    </a>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="nav-item daohang">
-                                    <img src="https://ss0.bdstatic.com/k4oZeXSm1A5BphGlnYG/icon/95488.png" />
-                                    <a class="border-for-item" title="新浪微博" href="http://weibo.com/" target="_blank">
-                                        <span class="nav-text-content">新浪微博</span></div>
-                                    </a>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="nav-item daohang">
-                                    <img src="https://ss2.bdstatic.com/lfoZeXSm1A5BphGlnYG/icon/7718.png?1" />
-                                    <a class="border-for-item" title="哔哩哔哩" href="http://www.bilibili.com/video/ent.html" target="_blank">
-                                        <span class="nav-text-content">哔哩哔哩</span></div>
-                                    </a>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="nav-item daohang">
-                                    <img src="https://ss3.bdstatic.com/iPoZeXSm1A5BphGlnYG/icon/95599.png" />
-                                    <a class="border-for-item" title="知乎" href="http://www.zhihu.com/" target="_blank">
-                                        <span class="nav-text-content">知乎</span></div>
-                                    </a>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="nav-item daohang">
-                                    <img src="https://ss3.bdstatic.com/lPoZeXSm1A5BphGlnYG/icon/7027.png" />
-                                    <a class="border-for-item" title="bing" href="https://cn.bing.com/" target="_blank">
-                                        <span class="nav-text-content">bing</span></div>
-                                    </a>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="nav-item daohang">
-                                    <img src="http://s1.music.126.net/music.ico?v1" />
-                                    <a class="border-for-item" title="云音乐" href="http://music.163.com/" target="_blank">
-                                        <span class="nav-text-content">云音乐</span></div>
-                                    </a>
-                                </div>
-                            </td>
-                        </tr>
                         
-                        </tbody>
                     </table>
                 </div>
             </div>
@@ -226,51 +125,92 @@
         <script type="text/javascript" src="${ctxStatic}/js/layer-v3.0.1/layer/layer.js"></script>
         <script type="text/javascript" src="${ctxStatic}/js/vue.js"></script>
         <script>
-            var date = new Date();
-            var month = date.getMonth() + 1;
-            if(month < 10) {
-                month = "0" + month
-            }
-            var strDate = date.getDate();
-            var year = date.getFullYear()
-            $(function() {
-            	getnavList()
-                //搜索栏消失
-                $('.forms').hide();
-                $('#baiduForm').show()
-                $('#daohang').hide();
-                //设置背景图片
-//              $('body').attr("background", "${bingimg}")
-				//具体搜索栏显示
-                $('#baidu').click(function() {
-                    $('.forms').hide();
-                    $('#baiduForm').show();
-                    $('#nameSou').text("百度")
-                })
-                $('#bing').click(function() {
-                    $('.forms').hide();
-                    $('#bingForm').show();
-                    $('#nameSou').text("bing")
-                })
-                $('#sougou').click(function() {
-                    $('.forms').hide();
-                    $('#sougouForm').show();
-                    $('#nameSou').text("搜狗")
-                })
-                //导航区域是否显示
-                $('#daohanghome').click(function(){
-                    $('#daohang').toggle()
-                })
-                $('#daohang2').click(function(){
-                    $('#daohanghome').click()
-                })
-                var x=$(document).height();
-            	var y=$(document).width();
-//          	$('.allcontent').attr('style',"background: url(${bingimg}) no-repeat;width:"+y+"px;height:"+x+"px;overflow:hidden;")
-//				$('.allcontent').attr('style',"background: url(${bingimg}) no-repeat;width:100%;height:"+x+"px;overflow:hidden;")
-//          	$('.allcontent').css("background-size","100% "+x+"px;")
-//          	$('.allcontent').css("background-size",y+"px "+x+"px;")
-            })
+        	//对导航进行修改
+        	var baidufr=new Vue({
+			  el: '#baiduForm',
+			  data: {
+			    seen:true
+			  }
+			})
+        	var soufr=new Vue({
+			  el: '#sougouForm',
+			  data: {
+			    seen:false
+			  }
+			})
+        	var bingfr=new Vue({
+			  el: '#bingForm',
+			  data: {
+			    seen:false
+			  }
+			})
+        	
+        	//具体显示操作
+        	var baid=new Vue({
+        		el:'#baidu',
+        		methods:{
+        			baidushow:function(){
+        				baidufr.seen=true;
+        				soufr.seen=false;
+        				bingfr.seen=false;
+        				nameSou.title='百度'
+        			}
+        		}
+        	})
+        	var soug=new Vue({
+        		el:'#sougou',
+        		methods:{
+        			sougoushow:function(){
+        				baidufr.seen=false;
+        				soufr.seen=true;
+        				bingfr.seen=false;
+        				nameSou.title='搜狗'
+        			}
+        		}
+        	})
+        	var binffff=new Vue({
+        		el:'#bing',
+        		methods:{
+        			bingshow:function(){
+        				bingfr.seen=true;
+        				baidufr.seen=false;
+        				soufr.seen=false;
+        				nameSou.title='Bing'
+        			}
+        		}
+        	})
+        	
+        	var nameSou=new Vue({
+        		el:'#nameSou',
+        		data:{
+        			title:"百度"
+        		}
+        	})
+        	var daohanghome=new Vue({
+        		el:'#daohanghome',
+        		data:{
+        			name:'Navigation',
+        			isactive:true
+        		},
+        		methods:{
+        			dhshow:function(){
+        				console.log(this.name)
+        				if(daohang.seen===false){
+        					this.isactive=true;
+        					daohang.seen=true;
+        				}else{
+        					this.isactive=false;
+        					daohang.seen=false;
+        				}
+        			}
+        		}
+        	})
+        	var daohang=new Vue({
+        		el:'#daohang',
+        		data:{
+        			seen:false
+        		}
+        	})
             function insertNewNav(){
             	layer.open({
 				  type: 2,
@@ -292,50 +232,6 @@
             		}
             	});
             }
-            //返回背景图片
-            function retundata() {
-                var datastr = "${ctxStatic}/img/bing/bing" + year + "-" + month + "-" + strDate + ".jpg"
-                var b = checkImage(datastr);
-                  console.log(b)
-                if(b) {
-                    return datastr;
-                } else {
-                    return "${ctxStatic}/img/bing/bing" + year + "-" + month + "-" + (strDate - 1) + ".jpg"
-                }
-
-            }
-            //查看图片是否存在
-            function checkImage(srcimage) {
-                var ImgObj = new Image();
-                ImgObj.src = srcimage;
-                if(ImgObj.fileSize > 0 || (ImgObj.width > 0 && ImgObj.height > 0)) {
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-            //          function image1(){
-            //              var ifa1=$('#bingdiv');
-            //              console.log(ifa1.length)
-            //              console.log(ifa1.html().length)
-            //              for(var i=0;i<100000;i++){
-            //                  console.log(ifa1.html().length)
-            //              }
-            //              
-            //          }
-            //          //HPImageArchive.aspx?format=js&idx=0&n=1&nc=1361089515117&FORM=HYLH1
-                        function returnclassify(){
-                            $.ajax({
-                                type:"post",
-                                url:"http://120.195.67.134/vun-member/sys/classify/type",
-                                async:true,
-                                dataType:'json',
-                                success:function(data){
-                                    console.log(data)
-                                }
-                            });
-                            
-                        }
         </script>
     </body>
 

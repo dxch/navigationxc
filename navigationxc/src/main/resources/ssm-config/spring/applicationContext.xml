@@ -6,13 +6,16 @@
 	xmlns:jee="http://www.springframework.org/schema/jee" 
 	xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:websocket="http://www.springframework.org/schema/websocket"  
 	xsi:schemaLocation="  
             http://www.springframework.org/schema/beans
             http://www.springframework.org/schema/beans/spring-beans.xsd 
             http://www.springframework.org/schema/tx
             http://www.springframework.org/schema/tx/spring-tx.xsd  
             http://www.springframework.org/schema/context 
-            http://www.springframework.org/schema/context/spring-context.xsd"
+            http://www.springframework.org/schema/context/spring-context.xsd
+            http://www.springframework.org/schema/websocket 
+            http://www.springframework.org/schema/websocket/spring-websocket.xsd"
      default-lazy-init="false">
      
      
@@ -23,15 +26,16 @@
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
 		<context:exclude-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice" />
 	</context:component-scan>
+     
+     <websocket:handlers>  
+        <websocket:mapping path="/websocket" handler="websocket"/>  
+        <websocket:handshake-interceptors>  
+        <bean class="com.module.websocket.controller.HandshakeInterceptor"/>  
+        </websocket:handshake-interceptors>  
+    </websocket:handlers>   
     
-   <!-- <bean id="websocket" class="com.module.websocket.controller.WebsocketEndPoint"/>  
-
-	<websocket:handlers>  
-	    <websocket:mapping path="/websocket" handler="websocket"/>  
-	    <websocket:handshake-interceptors>  
-	    <bean class="com.module.websocket.controller.HandshakeInterceptor"/>  
-	    </websocket:handshake-interceptors>  
-	</websocket:handlers>  -->
+    <bean id="websocket" class="com.module.websocket.controller.WebsocketEndPoint"/>  
+    
 
 	<!-- 加载 properties -->
 	<context:property-placeholder location="classpath:properties/global.properties" />
@@ -42,11 +46,7 @@
 		<property name="driverClass" value="${db.driverClass}" />
 		<property name="jdbcUrl" value="${db.jdbcUrl}" />
 		<property name="user" value="${db.user}" />
-		<property name="password" value="${db.password}" />
-		
-		
-		
-		
+		<property name="password" value="${db.password}" />	
 	</bean>
 	<bean id="ds2" class="com.mchange.v2.c3p0.ComboPooledDataSource">
 		<property name="driverClass" value="${db2.driverClass}" />

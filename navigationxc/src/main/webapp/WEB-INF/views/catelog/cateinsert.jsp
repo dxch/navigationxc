@@ -21,15 +21,24 @@
         </style>
     </head>
     <body>
-    	<label for="aname">链接名</label><input name='aname' id='aname' /><br />
-    	<br>
-    	<label for="aurl">链接url</label><input  name='aurl' id='aurl'/><br />
-    	<br>
-    	<label></label><button onclick='insertnav()'>提交</button>
-    	
+    	<div id='insertnewNav'>
+	    	<label for="aname">链接名</label><input v-model='aname' name='aname' id='aname' placeholder="请输入链接名"/>
+	    	<label></label><p>{{ aname }}</p>
+	    	<label for="aurl">链接url</label><input v-model='aurl' name='aurl' id='aurl' placeholder="请输入链接"/>
+	    	<label></label><p>{{ aurl }}</p>
+	    	<label></label><button onclick='insertnav()'>提交</button>
+    	</div>
     	<script type="text/javascript" src="${ctxStatic}/js/jquery-3.1.1.js"></script>
     	<script type="text/javascript" src="${ctxStatic}/js/layer-v3.0.1/layer/layer.js"></script>
+    	<script type="text/javascript" src="${ctxStatic}/js/vue.js"></script>
     	<script>
+    		var insertNewNa=new Vue({
+    			el:'#insertnewNav',
+    			data:{
+    				aname:'',
+    				aurl:''
+    			}
+    		})
     		function insertnav(){
     			$.ajax({
 	    			type:"post",
