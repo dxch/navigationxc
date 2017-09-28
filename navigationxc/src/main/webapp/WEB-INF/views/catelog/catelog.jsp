@@ -24,7 +24,7 @@
             }
 			body{
 				background-size:100%;
-				/*background: url(${bingimg}) no-repeat;*/
+				background: url(${bingimg}) no-repeat;
 				width:100%;
 				overflow:hidden;
 				
@@ -92,17 +92,37 @@
         <div id='backgroundimg' style='width:100%'>
             <div id='daohang' style="margin-left:25% ;margin-top: 300px;" v-if="seen">
                 <div style='display: block;width:50%;align-content: center;'>
-                    <table style="width:100%;background-color: #FFFFFF;">
-                        <thead><tr>
-                            
-                            <td id='daohang2'>→ 我的导航</td>
-                        </tr></thead>
-                        
-                    </table>
+                    <div style="width:100%;background-color: #FFFFFF;">
+                    	<div id='daohang2'>→ 我的导航</div>
+                        	
+                    </div>
+                    		
                 </div>
+            </div>
+            
+            <div id='tnavlist' style="margin-left:25% ;margin-top: 300px;">
+				<div  v-for="(item,index) in items">  
+					<div class="nav-item daohang" v-bind:key="item.id">
+						<img v-bind:src="item.aImg" />
+		                <a class="border-for-item" v-bind:title="item.aName" v-bind:href="item.aurl" target="_blank">
+		                    <span class="nav-text-content">{{ item.aName }}</span>
+		                </a>
+					</div>
+				</div>
             </div>
         </div>
 		</div>
+							
+		<!--<div id='tnavlist'>
+			<div  v-for="item in items" class="nav-item daohang" v-bind:key="item.id">
+								{{ item.aName }}
+								{{ item.aImg }}
+								<img v-bind:src="item.aImg" />
+                                <a class="border-for-item" v-bind:title="item.aName" v-bind:href="item.aurl" target="_blank">
+                                    <span class="nav-text-content">{{ item.aName }}</span>
+                                </a>
+							</div>
+		</div>-->
 		<button onclick='insertNewNav()'>insertnav</button>
         <script src="http://s1.bdstatic.com/r/www/cache/global/js/BaiduHttps_20150714_zhanzhang.js"></script>
         <script>
@@ -124,7 +144,50 @@
         <script type="text/javascript" src="${ctxStatic}/js/bootstrap.js"></script>
         <script type="text/javascript" src="${ctxStatic}/js/layer-v3.0.1/layer/layer.js"></script>
         <script type="text/javascript" src="${ctxStatic}/js/vue.js"></script>
+        <script type="text/javascript" src="${ctxStatic}/js/axios.js" ></script>
         <script>
+        var ddd=[
+        	{
+        		aName:'123',
+        		aurl:'localhost:8080/sads',
+        		aImg:'dasdas',
+        		id:'dasdas'
+        	},
+        	{
+        		aName:'jansgu',
+        		aurl:'localhost:8080/sads',
+        		aImg:'dasdas',
+        		id:'jkjkjkljkl'
+        	}
+        ]
+        			function getnavlist(){
+        				var xxx;
+        				axios({
+                            method:'post',
+                            url:'${ctx}/nav/getnavlist'}).then(function(resp) {
+                                var respdata=resp.data;
+                                tnavlist.items.splice(respdata.length)
+                                for(var i=0;i<respdata.length;i++){
+                                	tnavlist.items.splice(i,1,respdata[i])
+                                }
+                            }).catch(function(error) {
+                                console.log(error)
+                                var index3 = layer.alert("获取目录失败", {
+                                    icon: 5,
+                                    skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+                                })
+                                setTimeout(function() {
+                                    layer.close(index3)
+                                }, 3000)
+                            })
+        			}
+        			getnavlist();
+        			var tnavlist=new Vue({
+                        el:'#tnavlist',
+                        data:{
+                            items:ddd
+                        },
+                    })
         	//对导航进行修改
         	var baidufr=new Vue({
 			  el: '#baiduForm',
@@ -186,6 +249,7 @@
         			title:"百度"
         		}
         	})
+        	
         	var daohanghome=new Vue({
         		el:'#daohanghome',
         		data:{
@@ -194,7 +258,6 @@
         		},
         		methods:{
         			dhshow:function(){
-        				console.log(this.name)
         				if(daohang.seen===false){
         					this.isactive=true;
         					daohang.seen=true;
@@ -221,17 +284,12 @@
 				  content: '${ctx}/nav/insertnewnav'
 				});
             }
-            function getnavList(){
-            	$.ajax({
-            		type:"post",
-            		url:"${ctx}/nav/getnavlist",
-            		async:true,
-            		dataType:'json',
-            		success:function(data){
-            			console.log(data)
-            		}
-            	});
-            }
+            Vue.component("navdiv",{
+            	template:'<div>123</div>'
+            })
+            
+            
+            
         </script>
     </body>
 

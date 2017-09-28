@@ -31,6 +31,7 @@
     	<script type="text/javascript" src="${ctxStatic}/js/jquery-3.1.1.js"></script>
     	<script type="text/javascript" src="${ctxStatic}/js/layer-v3.0.1/layer/layer.js"></script>
     	<script type="text/javascript" src="${ctxStatic}/js/vue.js"></script>
+    	<script type="text/javascript" src="${ctxStatic}/js/axios.js" ></script>
     	<script>
     		var insertNewNa=new Vue({
     			el:'#insertnewNav',
@@ -40,39 +41,51 @@
     			}
     		})
     		function insertnav(){
-    			$.ajax({
-	    			type:"post",
-	    			url:"${ctx}/nav/insertnav",
-	    			async:true,
-	    			data:{
-	    				aurl:$('#aurl').val(),
+    			axios.post('${ctx}/nav/insertnav',{
+    				params:{
+    					aurl:$('#aurl').val(),
 	    				aName:$('#aname').val()
-	    			},
-	    			dataType:'json',
-	    			success:function(data){
-	    				if(data.count > 0){
-	    					var index3=layer.alert("添加成功", {
-                              icon: 6,
-                              skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
-                            })
-                            setTimeout(function(){
-                            	layer.close(index3)
-                                var index=parent.layer.getFrameIndex(window.name);
-	    						parent.layer.close(index);
-                            },3000)
-	    					
-	    				}
-	    			},
-	    			error:function(){
-	    					var index3=layer.alert("添加失败", {
-                              icon: 5,
-                              skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
-                            })
-                            setTimeout(function(){
-                            	layer.close(index3)
-                            },3000)
-	    			}
-	    		});
+    				}
+    			}).then(function(response){
+    				console.log(response)
+    				console.log(response.data)
+    				console.log(response.data.count)
+    			}).catch(function(error){
+    				console.log(error)
+    			})
+//  			$.ajax({
+//	    			type:"post",
+//	    			url:"${ctx}/nav/insertnav",
+//	    			async:true,
+//	    			data:{
+//	    				aurl:$('#aurl').val(),
+//	    				aName:$('#aname').val()
+//	    			},
+//	    			dataType:'json',
+//	    			success:function(data){
+//	    				if(data.count > 0){
+//	    					var index3=layer.alert("添加成功", {
+//                            icon: 6,
+//                            skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+//                          })
+//                          setTimeout(function(){
+//                          	layer.close(index3)
+//                              var index=parent.layer.getFrameIndex(window.name);
+//	    						parent.layer.close(index);
+//                          },3000)
+//	    					
+//	    				}
+//	    			},
+//	    			error:function(){
+//	    					var index3=layer.alert("添加失败", {
+//                            icon: 5,
+//                            skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+//                          })
+//                          setTimeout(function(){
+//                          	layer.close(index3)
+//                          },3000)
+//	    			}
+//	    		});
     		}
     	</script>
  	</body>
