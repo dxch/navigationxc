@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -64,7 +65,8 @@ public class NavigationControlller {
      */
     @RequestMapping("/insertnav")
     @ResponseBody
-    public Map<String,Object> insertNav(Nav n){
+    public Map<String,Object> insertNav(HttpServletRequest req,@RequestBody Nav n){
+        System.out.println(n);
         n.setId(UUidStr.uuid());
         int i=navService.insertNewNav(n);
         Map<String,Object> m=new HashMap<String,Object>();

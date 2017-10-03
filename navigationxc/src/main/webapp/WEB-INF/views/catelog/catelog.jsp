@@ -15,6 +15,16 @@
                 zoom: 1;
                 height: 44px;
                 line-height: 44px;
+                width: 20%;
+                cursor: pointer;
+                float: left;
+                background-color: #FFFFFF;
+            }
+            .navlistcon {
+                display: inline-block;
+                zoom: 1;
+                height: 44px;
+                line-height: 44px;
                 width: 100%;
                 cursor: pointer;
                 float: left;
@@ -99,17 +109,18 @@
                     		
                 </div>
             </div>
-            
-            <div id='tnavlist' style="margin-left:25% ;margin-top: 300px;">
-				<div  v-for="(item,index) in items">  
-					<div class="nav-item daohang" v-bind:key="item.id">
-						<img v-bind:src="item.aImg" />
-		                <a class="border-for-item" v-bind:title="item.aName" v-bind:href="item.aurl" target="_blank">
-		                    <span class="nav-text-content">{{ item.aName }}</span>
-		                </a>
+            <div id='navlistcon' style="margin-left:25% ;margin-top: 10px;">
+	            <div id='tnavlist' style='display: block;width:50%;align-content: center;background-color: #FFFFFF;' v-if="seen">
+					<div  v-for="(item,index) in items" >
+						<div class="nav-item daohang" v-bind:key="item.id">
+							<img v-bind:src="item.aImg" />
+			                <a class="border-for-item" v-bind:title="item.aName" v-bind:href="item.aurl" target="_blank">
+			                    <span class="nav-text-content" v-text='item.aName'></span>
+			                </a>
+						</div>
 					</div>
-				</div>
-            </div>
+	            </div>
+	        </div>
         </div>
 		</div>
 							
@@ -147,18 +158,7 @@
         <script type="text/javascript" src="${ctxStatic}/js/axios.js" ></script>
         <script>
         var ddd=[
-        	{
-        		aName:'123',
-        		aurl:'localhost:8080/sads',
-        		aImg:'dasdas',
-        		id:'dasdas'
-        	},
-        	{
-        		aName:'jansgu',
-        		aurl:'localhost:8080/sads',
-        		aImg:'dasdas',
-        		id:'jkjkjkljkl'
-        	}
+        	
         ]
         			function getnavlist(){
         				var xxx;
@@ -168,6 +168,8 @@
                                 var respdata=resp.data;
                                 tnavlist.items.splice(respdata.length)
                                 for(var i=0;i<respdata.length;i++){
+                                	respdata[i].aImg="${ctxStatic}"+respdata[i].aImg
+                                	console.log(respdata[i].aurl)
                                 	tnavlist.items.splice(i,1,respdata[i])
                                 }
                             }).catch(function(error) {
@@ -185,7 +187,8 @@
         			var tnavlist=new Vue({
                         el:'#tnavlist',
                         data:{
-                            items:ddd
+                            items:ddd,
+                            seen:false
                         },
                     })
         	//对导航进行修改
@@ -261,9 +264,11 @@
         				if(daohang.seen===false){
         					this.isactive=true;
         					daohang.seen=true;
+        					tnavlist.seen=true;
         				}else{
         					this.isactive=false;
         					daohang.seen=false;
+        					tnavlist.seen=false;
         				}
         			}
         		}
@@ -280,7 +285,7 @@
 				  title: '添加导航',
 				  shadeClose: true,
 				  skin: 'layui-layer-rim', //加上边框
-				  area: ['420px', '240px'], //宽高
+				  area: ['420px', '420px'], //宽高
 				  content: '${ctx}/nav/insertnewnav'
 				});
             }

@@ -46,6 +46,11 @@ public class Nav implements Serializable{
     public void setCategoryId(String categoryId) {
         this.categoryId = categoryId;
     }
+    @Override
+    public String toString() {
+        return "Nav [id=" + id + ", aurl=" + aurl + ", aName=" + aName + ", aImg=" + aImg + ", index=" + index
+                + ", categoryId=" + categoryId + "]";
+    }
 
     
 }

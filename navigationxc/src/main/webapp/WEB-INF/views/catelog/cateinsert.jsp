@@ -41,17 +41,33 @@
     			}
     		})
     		function insertnav(){
+    			console.log($('#aurl').val())
     			axios.post('${ctx}/nav/insertnav',{
-    				params:{
     					aurl:$('#aurl').val(),
 	    				aName:$('#aname').val()
-    				}
     			}).then(function(response){
     				console.log(response)
     				console.log(response.data)
     				console.log(response.data.count)
+    							var index3 = layer.alert("添加成功", {
+                                    icon: 5,
+                                    skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+                                })
+                                setTimeout(function() {
+                                    layer.close(index3)
+                                    parent.window.layer.closeAll()
+                                    parent.getnavlist()
+                                }, 3000)
     			}).catch(function(error){
     				console.log(error)
+    							var index3 = layer.alert("添加失败", {
+                                    icon: 5,
+                                    skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+                                })
+                                setTimeout(function() {
+                                    layer.close(index3)
+                                     parent.window.layer.closeAll()
+                                }, 3000)
     			})
 //  			$.ajax({
 //	    			type:"post",
