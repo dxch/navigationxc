@@ -366,7 +366,7 @@
                 <artifactId>maven-war-plugin</artifactId>
                 <!-- 热部署是注释掉,jenkins部署放开-->
                 <configuration>
-                    <outputDirectory>${basedir}/../../../../</outputDirectory>
+                    <outputDirectory>${basedir}/../../../</outputDirectory>
                 </configuration>
                  
             </plugin>
