@@ -33,7 +33,7 @@
             <artifactId>xstream</artifactId>
             <version>1.4.9</version>
         </dependency>
-        <!-- core -->
+        <!-- core 
         <dependency>
           <groupId>fakepath</groupId>
           <artifactId>vp-core</artifactId>
@@ -43,7 +43,7 @@
 		    <groupId>javax.servlet</groupId>  
 		    <artifactId>javax.servlet-api</artifactId>  
 		    <version>3.1.0</version>  
-		</dependency> 
+		</dependency> -->
         <!-- sendMsg -->
         <dependency>
           <groupId>com.linkage.netmsg</groupId>
