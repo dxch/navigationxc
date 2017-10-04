@@ -271,13 +271,13 @@
             <artifactId>spring-context</artifactId>
             <version>4.0.2.RELEASE</version>
         </dependency>
-        <!-- form表单提交工具 -->
+        <!-- form表单提交工具 
         <dependency>
           <groupId>goumq</groupId>
           <artifactId>JumpTarget</artifactId>
           <version>1.0</version>
           <classifier>JumpTarget</classifier>
-        </dependency>
+        </dependency> -->
         <!-- 支付相关 -->
         <dependency>
             <groupId>commons-codec</groupId>
