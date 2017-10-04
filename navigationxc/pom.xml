@@ -364,10 +364,10 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-                <!-- 热部署是注释掉,jenkins部署放开-->
+                <!-- 热部署是注释掉,jenkins部署放开
                 <configuration>
                     <outputDirectory>${basedir}</outputDirectory>
-                </configuration>
+                </configuration>-->
                  
             </plugin>
             <!--MyBatis代码生成-->
