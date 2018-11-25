@@ -330,14 +330,14 @@
     <finalName>navigationxc</finalName>
      <plugins>
             <!-- test插件,设定內存 -->
-            <plugin>
+            <!--  <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
                     <argLine>-Xmx256M</argLine>
                 </configuration>
             </plugin>           
-            <!--jetty插件, 设定context path与spring profile
+            jetty插件, 设定context path与spring profile
             <plugin>
                 <groupId>org.mortbay.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
@@ -349,8 +349,8 @@
                         <contextPath>/${project.artifactId}</contextPath>
                     </webAppConfig>
                 </configuration>
-            </plugin>-->
-            <!-- Tomcat7 插件
+            </plugin>
+            Tomcat7 插件
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
                 <artifactId>tomcat7-maven-plugin</artifactId>
@@ -359,23 +359,20 @@
 			      <server>gui</server>  
 			      <path>/gui</path>  
 			   </configuration>     
-            </plugin> -->
-            <!-- enforcer, 规则统一定义在parent 
+            </plugin>enforcer, 规则统一定义在parent 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
-            </plugin>-->
-            <!--更改打包路径
+            </plugin>更改打包路径
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-                <!-- 热部署是注释掉,jenkins部署放
+               热部署是注释掉,jenkins部署放
                 <configuration>
                     <outputDirectory>${basedir}</outputDirectory>
                 </configuration>
                  
-            </plugin>-->
-            <!--MyBatis代码生成
+            </plugin>MyBatis代码生成
             <plugin>
                 <groupId>org.mybatis.generator</groupId>
                 <artifactId>mybatis-generator-maven-plugin</artifactId>
