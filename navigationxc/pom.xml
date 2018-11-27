@@ -249,8 +249,5 @@
   </dependencies>
   <build>
     <finalName>navigationxc</finalName>
-     <plugins>
-     
-        </plugins>
   </build>
 </project>
