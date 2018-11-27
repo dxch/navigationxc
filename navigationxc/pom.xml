@@ -17,11 +17,6 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties> 
   <dependencies>
-	  	 <dependency>
-	     <groupId>org.apache.maven.plugins</groupId>
-	     <artifactId>maven-resources-plugin</artifactId>
-	     <version>2.6</version>
-        </dependency>
     <dependency>  
           <groupId>org.apache.zookeeper</groupId>  
           <artifactId>zookeeper</artifactId>  
@@ -32,24 +27,6 @@
         <artifactId>zkclient</artifactId>  
         <version>0.1</version>  
    </dependency> 
-   <!-- dubbo zookeeper依赖 -->
-
-        <dependency>
-            <groupId>com.thoughtworks.xstream</groupId>
-            <artifactId>xstream</artifactId>
-            <version>1.4.9</version>
-        </dependency>
-        <!-- core 
-        <dependency>
-          <groupId>fakepath</groupId>
-          <artifactId>vp-core</artifactId>
-          <version>1.0</version>
-        </dependency>
-        <dependency>  
-		    <groupId>javax.servlet</groupId>  
-		    <artifactId>javax.servlet-api</artifactId>  
-		    <version>3.1.0</version>  
-		</dependency> -->
         <!-- sendMsg 
         <dependency>
           <groupId>com.linkage.netmsg</groupId>
